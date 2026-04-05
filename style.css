@@ -876,6 +876,7 @@ ul {
 
 .contact-item a,
 .contact-item span {
+    display: block;
     font-size: 0.9rem;
     color: var(--text);
 }
