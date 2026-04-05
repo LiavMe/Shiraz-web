@@ -76,6 +76,7 @@ const timeMap = {
 document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
     initStickyHeader();
+    initServicesSlider();
     initGallery();
     initTestimonials();
     initContactForm();
@@ -111,6 +112,65 @@ function initStickyHeader() {
 
     window.addEventListener("scroll", () => {
         header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+}
+
+// ===== Services Slider =====
+function initServicesSlider() {
+    const track = document.getElementById("servicesTrack");
+    const prevBtn = document.getElementById("servicesPrev");
+    const nextBtn = document.getElementById("servicesNext");
+
+    if (!track) return;
+
+    const cards = track.querySelectorAll(".service-card");
+    let position = 0;
+
+    function isSliderActive() {
+        return window.innerWidth > 768;
+    }
+
+    function getVisibleCount() {
+        if (window.innerWidth <= 1024) return 3;
+        return 5;
+    }
+
+    function getCardWidth() {
+        const visible = getVisibleCount();
+        const gap = 24;
+        const containerWidth = track.parentElement.offsetWidth;
+        return (containerWidth + gap) / visible;
+    }
+
+    function maxPosition() {
+        return cards.length - getVisibleCount();
+    }
+
+    function updatePosition() {
+        if (!isSliderActive()) {
+            track.style.transform = "";
+            return;
+        }
+        const cardWidth = getCardWidth();
+        track.style.transform = `translateX(${position * cardWidth}px)`;
+    }
+
+    function advance() {
+        position = position >= maxPosition() ? 0 : position + 1;
+        updatePosition();
+    }
+
+    function retreat() {
+        position = position <= 0 ? maxPosition() : position - 1;
+        updatePosition();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", retreat);
+    if (nextBtn) nextBtn.addEventListener("click", advance);
+
+    window.addEventListener("resize", () => {
+        position = Math.min(position, Math.max(0, maxPosition()));
+        updatePosition();
     });
 }
 

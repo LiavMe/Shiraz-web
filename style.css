@@ -414,10 +414,15 @@ ul {
     background: var(--white);
 }
 
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.services-slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.services-track {
+    display: flex;
     gap: 24px;
+    transition: transform 0.5s ease;
 }
 
 .service-card {
@@ -427,19 +432,52 @@ ul {
     padding: 28px 20px;
     text-align: center;
     transition: all var(--transition);
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.service-card.animate-in {
-    opacity: 1;
-    transform: translateY(0);
+    flex: 0 0 calc(20% - 20px);
+    min-width: 0;
 }
 
 .service-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-md);
     border-color: var(--primary-light);
+}
+
+.services-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-light);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark);
+    z-index: 5;
+    transition: all var(--transition);
+}
+
+.services-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.services-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.services-btn--prev {
+    right: 12px;
+}
+
+.services-btn--next {
+    left: 12px;
 }
 
 .service-icon {
@@ -1380,8 +1418,8 @@ body.stop-animations *::after {
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-    .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    .service-card {
+        flex: 0 0 calc(33.333% - 16px);
     }
 
     .contact-grid {
@@ -1440,9 +1478,21 @@ body.stop-animations *::after {
         font-size: 2.4rem;
     }
 
-    .services-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
+    .services-slider {
+        overflow: visible;
+    }
+
+    .services-track {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .service-card {
+        flex: 0 0 calc(50% - 12px);
+    }
+
+    .services-btn {
+        display: none;
     }
 
     .cta-text {
@@ -1483,8 +1533,8 @@ body.stop-animations *::after {
         padding: 36px 0 48px;
     }
 
-    .services-grid {
-        grid-template-columns: 1fr;
+    .service-card {
+        flex: 0 0 100%;
     }
 
     .section-title-script {
