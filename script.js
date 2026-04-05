@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initTestimonials();
     initContactForm();
     initScrollAnimations();
+    initAccessibilityWidget();
     lucide.createIcons();
 });
 
@@ -356,4 +357,81 @@ function initScrollAnimations() {
     );
 
     elements.forEach(el => observer.observe(el));
+}
+
+// ===== Accessibility Widget =====
+function initAccessibilityWidget() {
+    const toggle = document.getElementById("a11yToggle");
+    const panel = document.getElementById("a11yPanel");
+
+    if (!toggle || !panel) return;
+
+    let fontSize = 100;
+
+    toggle.addEventListener("click", () => {
+        panel.classList.toggle("open");
+    });
+
+    // Close panel when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+            panel.classList.remove("open");
+        }
+    });
+
+    // Font size
+    const fontIncrease = document.getElementById("fontIncrease");
+    const fontDecrease = document.getElementById("fontDecrease");
+
+    if (fontIncrease) {
+        fontIncrease.addEventListener("click", () => {
+            fontSize = Math.min(150, fontSize + 10);
+            document.documentElement.style.fontSize = fontSize + "%";
+        });
+    }
+
+    if (fontDecrease) {
+        fontDecrease.addEventListener("click", () => {
+            fontSize = Math.max(80, fontSize - 10);
+            document.documentElement.style.fontSize = fontSize + "%";
+        });
+    }
+
+    // High contrast
+    const contrastToggle = document.getElementById("contrastToggle");
+    if (contrastToggle) {
+        contrastToggle.addEventListener("click", () => {
+            document.body.classList.toggle("high-contrast");
+            contrastToggle.classList.toggle("active");
+        });
+    }
+
+    // Highlight links
+    const linksToggle = document.getElementById("linksToggle");
+    if (linksToggle) {
+        linksToggle.addEventListener("click", () => {
+            document.body.classList.toggle("highlight-links");
+            linksToggle.classList.toggle("active");
+        });
+    }
+
+    // Stop animations
+    const animToggle = document.getElementById("animToggle");
+    if (animToggle) {
+        animToggle.addEventListener("click", () => {
+            document.body.classList.toggle("stop-animations");
+            animToggle.classList.toggle("active");
+        });
+    }
+
+    // Reset
+    const resetBtn = document.getElementById("a11yReset");
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            fontSize = 100;
+            document.documentElement.style.fontSize = "";
+            document.body.classList.remove("high-contrast", "highlight-links", "stop-animations");
+            panel.querySelectorAll(".a11y-btn.active").forEach(b => b.classList.remove("active"));
+        });
+    }
 }
