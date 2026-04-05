@@ -483,6 +483,69 @@ ul {
     line-height: 1.65;
 }
 
+/* ===== Brands Section ===== */
+.brands {
+    padding: 70px 0;
+    background: linear-gradient(160deg, var(--white) 0%, var(--primary-lighter) 50%, var(--nude-light) 100%);
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.brand-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary-lighter);
+    transition: all var(--transition);
+    aspect-ratio: 3 / 2;
+}
+
+.brand-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.brand-card img {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.brands-note {
+    text-align: center;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .brands-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brands-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .brand-card {
+        padding: 16px;
+    }
+}
+
 /* ===== Gallery Section ===== */
 .gallery {
     padding: 80px 0;
