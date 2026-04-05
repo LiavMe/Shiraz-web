@@ -361,11 +361,45 @@ function initScrollAnimations() {
 
 // ===== Accessibility Widget =====
 function initAccessibilityWidget() {
+    // Inject widget HTML into body to ensure position:fixed works
+    const widgetHTML = `
+        <button class="a11y-widget-btn" id="a11yToggle" aria-label="תפריט נגישות" style="position:fixed;top:50%;left:0;transform:translateY(-50%);z-index:1001;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2.5"/><path d="m4.5 9 3.3.9c.6.2 1.3.2 1.9 0L12 9l2.3.9c.6.2 1.3.2 1.9 0L19.5 9"/><path d="M12 9v4"/><path d="m7.5 19 3-4h3l3 4"/></svg>
+        </button>
+        <div class="a11y-panel" id="a11yPanel" style="position:fixed;top:50%;transform:translateY(-50%);z-index:1002;">
+            <h3>הגדרות נגישות</h3>
+            <div class="a11y-option">
+                <span>גודל טקסט</span>
+                <div class="a11y-option-btns">
+                    <button class="a11y-btn" id="fontDecrease" aria-label="הקטנת טקסט">א-</button>
+                    <button class="a11y-btn" id="fontIncrease" aria-label="הגדלת טקסט">א+</button>
+                </div>
+            </div>
+            <div class="a11y-option">
+                <span>ניגודיות גבוהה</span>
+                <div class="a11y-option-btns">
+                    <button class="a11y-btn" id="contrastToggle" aria-label="מצב ניגודיות גבוהה">C</button>
+                </div>
+            </div>
+            <div class="a11y-option">
+                <span>הדגשת קישורים</span>
+                <div class="a11y-option-btns">
+                    <button class="a11y-btn" id="linksToggle" aria-label="הדגשת קישורים">U</button>
+                </div>
+            </div>
+            <div class="a11y-option">
+                <span>עצירת אנימציות</span>
+                <div class="a11y-option-btns">
+                    <button class="a11y-btn" id="animToggle" aria-label="עצירת אנימציות">P</button>
+                </div>
+            </div>
+            <button class="a11y-reset" id="a11yReset">איפוס הגדרות</button>
+        </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", widgetHTML);
+
     const toggle = document.getElementById("a11yToggle");
     const panel = document.getElementById("a11yPanel");
-
-    if (!toggle || !panel) return;
-
     let fontSize = 100;
 
     toggle.addEventListener("click", () => {
@@ -380,40 +414,27 @@ function initAccessibilityWidget() {
     });
 
     // Font size
-    const fontIncrease = document.getElementById("fontIncrease");
-    const fontDecrease = document.getElementById("fontDecrease");
+    document.getElementById("fontIncrease").addEventListener("click", () => {
+        fontSize = Math.min(150, fontSize + 10);
+        document.documentElement.style.fontSize = fontSize + "%";
+    });
 
-    if (fontIncrease) {
-        fontIncrease.addEventListener("click", () => {
-            fontSize = Math.min(150, fontSize + 10);
-            document.documentElement.style.fontSize = fontSize + "%";
-        });
-    }
-
-    if (fontDecrease) {
-        fontDecrease.addEventListener("click", () => {
-            fontSize = Math.max(80, fontSize - 10);
-            document.documentElement.style.fontSize = fontSize + "%";
-        });
-    }
+    document.getElementById("fontDecrease").addEventListener("click", () => {
+        fontSize = Math.max(80, fontSize - 10);
+        document.documentElement.style.fontSize = fontSize + "%";
+    });
 
     // High contrast
-    const contrastToggle = document.getElementById("contrastToggle");
-    if (contrastToggle) {
-        contrastToggle.addEventListener("click", () => {
-            document.body.classList.toggle("high-contrast");
-            contrastToggle.classList.toggle("active");
-        });
-    }
+    document.getElementById("contrastToggle").addEventListener("click", function () {
+        document.body.classList.toggle("high-contrast");
+        this.classList.toggle("active");
+    });
 
     // Highlight links
-    const linksToggle = document.getElementById("linksToggle");
-    if (linksToggle) {
-        linksToggle.addEventListener("click", () => {
-            document.body.classList.toggle("highlight-links");
-            linksToggle.classList.toggle("active");
-        });
-    }
+    document.getElementById("linksToggle").addEventListener("click", function () {
+        document.body.classList.toggle("highlight-links");
+        this.classList.toggle("active");
+    });
 
     // Stop animations
     const animToggle = document.getElementById("animToggle");
