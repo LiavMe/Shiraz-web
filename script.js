@@ -58,6 +58,8 @@ const topicMap = {
     Acne: "טיפול באקנה",
     Pigmentation: "טיפול בפיגמנטציה",
     AntiAging: "אנטי אייג'ינג",
+    LesionRemoval: "הסרת נגעים",
+    BodyTreatment: "טיפולי גוף - מיצוק והצערה",
     Consultation: "ייעוץ",
     Other: "אחר"
 };
@@ -65,7 +67,8 @@ const topicMap = {
 const timeMap = {
     Morning: "בוקר (09:00-12:00)",
     Noon: "צהריים (12:00-15:00)",
-    Afternoon: "אחר הצהריים (15:00-17:00)",
+    Afternoon: "אחר הצהריים (15:00-18:00)",
+    Evening: "ערב (18:00-20:00)",
     Flexible: "גמישה"
 };
 
