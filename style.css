@@ -1045,8 +1045,9 @@ textarea:focus-visible {
 
 /* ===== Legal Pages ===== */
 .legal-page {
-    padding-top: 180px;
+    padding-top: 100px;
     padding-bottom: 60px;
+    margin-top: 75px;
 }
 
 .legal-content {
