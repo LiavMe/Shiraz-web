@@ -1241,7 +1241,44 @@ textarea:focus-visible {
 
 /* High contrast mode */
 body.high-contrast {
-    filter: contrast(1.4);
+    --primary: #A0365A;
+    --primary-light: #D4627A;
+    --primary-lighter: #F5D0DA;
+    --primary-dark: #7A1A3A;
+    --accent: #C04D65;
+    --cta: #A0365A;
+    --cta-hover: #7A1A3A;
+    --charcoal: #000000;
+    --text: #1A1A1A;
+    --text-light: #333333;
+    --gray-50: #F5F5F5;
+    --nude-light: #F0E0DA;
+    background: #FFFFFF;
+}
+
+body.high-contrast .hero {
+    background: #F5F5F5;
+}
+
+body.high-contrast .service-card,
+body.high-contrast .testimonial-inner,
+body.high-contrast .contact-card,
+body.high-contrast .contact-form-wrapper {
+    border-color: #999;
+}
+
+body.high-contrast .nav-links a,
+body.high-contrast .footer-links a {
+    color: #000000;
+}
+
+body.high-contrast .footer {
+    background: #000000;
+}
+
+body.high-contrast .footer-links a,
+body.high-contrast .footer-name {
+    color: #FFFFFF;
 }
 
 /* Highlight links mode */
