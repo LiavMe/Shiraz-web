@@ -11,7 +11,7 @@
     --nude-light: #FDF5F2;
     --charcoal: #3D3D3D;
     --text: #555555;
-    --text-light: #888888;
+    --text-light: #6B6B6B;
     --gray-50: #FFF9FB;
     --gray-100: #FFF0F5;
     --white: #FFFFFF;
@@ -516,8 +516,14 @@ ul {
     transition: transform 0.4s ease;
 }
 
-.gallery-slide:hover img {
+.gallery-slide:hover img,
+.gallery-slide:focus-visible img {
     transform: scale(1.05);
+}
+
+.gallery-slide:focus-visible {
+    outline: 3px solid var(--primary-dark);
+    outline-offset: 2px;
 }
 
 .gallery-btn {

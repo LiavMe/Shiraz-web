@@ -169,31 +169,63 @@ function initGallery() {
     slider.addEventListener("mouseenter", () => clearInterval(autoplayInterval));
     slider.addEventListener("mouseleave", () => { autoplayInterval = setInterval(advance, 3000); });
 
+    // Make slides keyboard accessible
+    slides.forEach(slide => {
+        slide.setAttribute("tabindex", "0");
+        slide.setAttribute("role", "button");
+        const img = slide.querySelector("img");
+        slide.setAttribute("aria-label", img.alt + " - לחצי לתצוגה מוגדלת");
+    });
+
     // Lightbox
     const lightbox = document.createElement("div");
     lightbox.className = "gallery-lightbox";
-    lightbox.innerHTML = `<button class="gallery-lightbox-close">&times;</button><img src="" alt="">`;
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-label", "תצוגת תמונה מוגדלת");
+    lightbox.innerHTML = `<button class="gallery-lightbox-close" aria-label="סגירת תצוגה מוגדלת">&times;</button><img src="" alt="">`;
     document.body.appendChild(lightbox);
 
     const lightboxImg = lightbox.querySelector("img");
     const lightboxClose = lightbox.querySelector(".gallery-lightbox-close");
 
+    function openLightbox(slide) {
+        const img = slide.querySelector("img");
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("active");
+        lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove("active");
+    }
+
     slides.forEach(slide => {
-        slide.addEventListener("click", () => {
-            const img = slide.querySelector("img");
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightbox.classList.add("active");
+        slide.addEventListener("click", () => openLightbox(slide));
+        slide.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openLightbox(slide);
+            }
         });
     });
 
-    lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
+    lightboxClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) lightbox.classList.remove("active");
+        if (e.target === lightbox) closeLightbox();
     });
 
     document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") lightbox.classList.remove("active");
+        if (!lightbox.classList.contains("active")) return;
+        if (e.key === "Escape") closeLightbox();
+    });
+
+    // Trap focus inside lightbox when open
+    lightbox.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") {
+            e.preventDefault();
+            lightboxClose.focus();
+        }
     });
 
     // Recalc on resize
