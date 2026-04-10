@@ -15,7 +15,6 @@
     --gray-50: #FFF9FB;
     --gray-100: #FFF0F5;
     --white: #FFFFFF;
-    --background: #E0DBD2;
     --shadow-sm: 0 2px 8px rgba(212, 132, 154, 0.1);
     --shadow-md: 0 4px 20px rgba(212, 132, 154, 0.15);
     --shadow-lg: 0 8px 40px rgba(212, 132, 154, 0.2);
@@ -45,7 +44,7 @@ html {
 body {
     font-family: var(--font-body);
     color: var(--text);
-    background: var(--background);
+    background: var(--white);
     line-height: 1.7;
     overflow-x: hidden;
 }
@@ -151,7 +150,7 @@ ul {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(224, 219, 210, 0.97);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(10px);
     transition: box-shadow var(--transition);
 }
@@ -272,7 +271,7 @@ ul {
     position: relative;
     display: flex;
     align-items: center;
-    background: linear-gradient(160deg, var(--background) 0%, var(--primary-lighter) 40%, var(--nude-light) 100%);
+    background: linear-gradient(160deg, var(--white) 0%, var(--primary-lighter) 40%, var(--nude-light) 100%);
     padding-top: 75px;
     overflow: hidden;
 }
@@ -412,7 +411,7 @@ ul {
 /* ===== Services Section ===== */
 .services {
     padding: 80px 0;
-    background: var(--background);
+    background: var(--white);
 }
 
 .services-slider {
@@ -427,7 +426,7 @@ ul {
 }
 
 .service-card {
-    background: var(--background);
+    background: var(--white);
     border: 2px solid var(--primary-lighter);
     border-radius: var(--radius);
     padding: 28px 20px;
@@ -525,7 +524,7 @@ ul {
 /* ===== Brands Section ===== */
 .brands {
     padding: 70px 0;
-    background: linear-gradient(160deg, var(--background) 0%, var(--primary-lighter) 50%, var(--nude-light) 100%);
+    background: linear-gradient(160deg, var(--white) 0%, var(--primary-lighter) 50%, var(--nude-light) 100%);
 }
 
 .brands-grid {
@@ -537,7 +536,7 @@ ul {
 }
 
 .brand-card {
-    background: var(--background);
+    background: var(--white);
     border-radius: var(--radius);
     padding: 24px;
     display: flex;
@@ -588,7 +587,7 @@ ul {
 /* ===== Gallery Section ===== */
 .gallery {
     padding: 80px 0;
-    background: var(--background);
+    background: var(--gray-50);
 }
 
 .gallery-slider {
@@ -729,7 +728,7 @@ ul {
 /* ===== Testimonials ===== */
 .testimonials {
     padding: 80px 0;
-    background: var(--background);
+    background: var(--gray-50);
 }
 
 .testimonials-carousel {
@@ -750,7 +749,7 @@ ul {
 }
 
 .testimonial-inner {
-    background: var(--background);
+    background: var(--white);
     border-radius: var(--radius);
     padding: 32px;
     border: 2px solid var(--primary-lighter);
@@ -818,7 +817,7 @@ ul {
     height: 42px;
     border-radius: 50%;
     border: 2px solid var(--primary-light);
-    background: var(--background);
+    background: var(--white);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -861,7 +860,7 @@ ul {
 /* ===== Contact Section ===== */
 .contact {
     padding: 80px 0;
-    background: var(--background);
+    background: var(--white);
 }
 
 .contact-grid {
@@ -933,7 +932,7 @@ ul {
 
 /* Contact Form */
 .contact-form-wrapper {
-    background: var(--background);
+    background: var(--white);
     border-radius: var(--radius);
     padding: 36px;
     border: 2px solid var(--primary-lighter);
