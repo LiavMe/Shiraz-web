@@ -15,6 +15,7 @@
     --gray-50: #FFF9FB;
     --gray-100: #FFF0F5;
     --white: #FFFFFF;
+    --background: #E0DBD2;
     --shadow-sm: 0 2px 8px rgba(212, 132, 154, 0.1);
     --shadow-md: 0 4px 20px rgba(212, 132, 154, 0.15);
     --shadow-lg: 0 8px 40px rgba(212, 132, 154, 0.2);
@@ -44,7 +45,7 @@ html {
 body {
     font-family: var(--font-body);
     color: var(--text);
-    background: var(--white);
+    background: var(--background);
     line-height: 1.7;
     overflow-x: hidden;
 }
