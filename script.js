@@ -93,26 +93,26 @@ function debounce(fn, ms) {
 }
 
 // ===== DOM Ready =====
+function scheduleIdle(fn, timeout) {
+    if ("requestIdleCallback" in window) {
+        requestIdleCallback(fn, { timeout });
+    } else {
+        setTimeout(fn, timeout);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Critical: above-the-fold interactions
+    // Critical: above-the-fold interactions (runs immediately)
     initMobileMenu();
     initStickyHeader();
     initServicesSlider();
 
-    // Deferred: below-fold and non-critical work
-    const deferred = () => {
-        initGallery();
-        initTestimonials();
-        initContactForm();
-        initAccessibilityWidget();
-        lucide.createIcons();
-    };
-
-    if ("requestIdleCallback" in window) {
-        requestIdleCallback(deferred, { timeout: 2000 });
-    } else {
-        setTimeout(deferred, 200);
-    }
+    // Each deferred task gets its own idle slot — no single long task
+    scheduleIdle(() => initGallery(),              1000);
+    scheduleIdle(() => initTestimonials(),         1500);
+    scheduleIdle(() => initContactForm(),          2000);
+    scheduleIdle(() => initAccessibilityWidget(),  2500);
+    scheduleIdle(() => lucide.createIcons(),       3000);
 });
 
 // ===== Mobile Menu =====
