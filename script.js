@@ -112,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scheduleIdle(() => initTestimonials(),         1500);
     scheduleIdle(() => initContactForm(),          2000);
     scheduleIdle(() => initAccessibilityWidget(),  2500);
-    scheduleIdle(() => lucide.createIcons(),       3000);
 });
 
 // ===== Mobile Menu =====
