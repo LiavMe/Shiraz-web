@@ -412,7 +412,7 @@ ul {
 /* ===== Services Section ===== */
 .services {
     padding: 80px 0;
-    background: var(--white);
+    background: var(--background);
 }
 
 .services-slider {
@@ -861,7 +861,7 @@ ul {
 /* ===== Contact Section ===== */
 .contact {
     padding: 80px 0;
-    background: var(--white);
+    background: var(--background);
 }
 
 .contact-grid {
