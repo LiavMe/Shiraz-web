@@ -94,14 +94,25 @@ function debounce(fn, ms) {
 
 // ===== DOM Ready =====
 document.addEventListener("DOMContentLoaded", () => {
+    // Critical: above-the-fold interactions
     initMobileMenu();
     initStickyHeader();
     initServicesSlider();
-    initGallery();
-    initTestimonials();
-    initContactForm();
-    initAccessibilityWidget();
-    lucide.createIcons();
+
+    // Deferred: below-fold and non-critical work
+    const deferred = () => {
+        initGallery();
+        initTestimonials();
+        initContactForm();
+        initAccessibilityWidget();
+        lucide.createIcons();
+    };
+
+    if ("requestIdleCallback" in window) {
+        requestIdleCallback(deferred, { timeout: 2000 });
+    } else {
+        setTimeout(deferred, 200);
+    }
 });
 
 // ===== Mobile Menu =====
