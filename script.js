@@ -72,6 +72,26 @@ const timeMap = {
     Flexible: "גמישה"
 };
 
+// ===== Performance Helpers =====
+function throttle(fn, ms) {
+    let last = 0;
+    return function () {
+        const now = Date.now();
+        if (now - last >= ms) {
+            last = now;
+            fn.apply(this, arguments);
+        }
+    };
+}
+
+function debounce(fn, ms) {
+    let timer;
+    return function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, arguments), ms);
+    };
+}
+
 // ===== DOM Ready =====
 document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
@@ -80,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initGallery();
     initTestimonials();
     initContactForm();
-    initScrollAnimations();
     initAccessibilityWidget();
     lucide.createIcons();
 });
@@ -110,9 +129,9 @@ function initStickyHeader() {
     const header = document.getElementById("header");
     if (!header) return;
 
-    window.addEventListener("scroll", () => {
+    window.addEventListener("scroll", throttle(() => {
         header.classList.toggle("scrolled", window.scrollY > 50);
-    });
+    }, 100), { passive: true });
 }
 
 // ===== Services Slider =====
@@ -168,10 +187,10 @@ function initServicesSlider() {
     if (prevBtn) prevBtn.addEventListener("click", retreat);
     if (nextBtn) nextBtn.addEventListener("click", advance);
 
-    window.addEventListener("resize", () => {
+    window.addEventListener("resize", debounce(() => {
         position = Math.min(position, Math.max(0, maxPosition()));
         updatePosition();
-    });
+    }, 150));
 }
 
 // ===== Gallery Slider =====
@@ -220,17 +239,31 @@ function initGallery() {
     if (prevBtn) prevBtn.addEventListener("click", () => { retreat(); resetAutoplay(); });
     if (nextBtn) nextBtn.addEventListener("click", () => { advance(); resetAutoplay(); });
 
-    // Autoplay
-    let autoplayInterval = setInterval(advance, 3000);
+    // Autoplay — only when visible
+    let autoplayInterval = null;
     const slider = track.closest(".gallery-slider");
 
-    function resetAutoplay() {
-        clearInterval(autoplayInterval);
-        autoplayInterval = setInterval(advance, 3000);
+    function startAutoplay() {
+        if (!autoplayInterval) autoplayInterval = setInterval(advance, 3000);
     }
 
-    slider.addEventListener("mouseenter", () => clearInterval(autoplayInterval));
-    slider.addEventListener("mouseleave", () => { autoplayInterval = setInterval(advance, 3000); });
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+    }
+
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
+    const galleryObserver = new IntersectionObserver((entries) => {
+        entries[0].isIntersecting ? startAutoplay() : stopAutoplay();
+    }, { threshold: 0.1 });
+    galleryObserver.observe(slider);
+
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
 
     // Make slides keyboard accessible
     slides.forEach(slide => {
@@ -292,10 +325,10 @@ function initGallery() {
     });
 
     // Recalc on resize
-    window.addEventListener("resize", () => {
+    window.addEventListener("resize", debounce(() => {
         position = Math.min(position, maxPosition());
         updatePosition();
-    });
+    }, 150));
 }
 
 // ===== Testimonials Carousel =====
@@ -347,6 +380,10 @@ function initTestimonials() {
         dots.forEach((d, i) => d.classList.toggle("active", i === index));
     }
 
+    function advanceSlide() {
+        goTo(currentSlide < testimonials.length - 1 ? currentSlide + 1 : 0);
+    }
+
     if (prevBtn) {
         prevBtn.addEventListener("click", () => {
             goTo(currentSlide > 0 ? currentSlide - 1 : testimonials.length - 1);
@@ -359,21 +396,30 @@ function initTestimonials() {
         });
     }
 
-    // Auto-play
-    let autoplay = setInterval(() => {
-        goTo(currentSlide < testimonials.length - 1 ? currentSlide + 1 : 0);
-    }, 6000);
+    // Auto-play — only when visible
+    let autoplay = null;
+    const carousel = track.closest(".testimonials-carousel");
 
-    track.closest(".testimonials-carousel").addEventListener("mouseenter", () => clearInterval(autoplay));
-    track.closest(".testimonials-carousel").addEventListener("mouseleave", () => {
-        autoplay = setInterval(() => {
-            goTo(currentSlide < testimonials.length - 1 ? currentSlide + 1 : 0);
-        }, 6000);
-    });
+    function startAutoplay() {
+        if (!autoplay) autoplay = setInterval(advanceSlide, 6000);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplay);
+        autoplay = null;
+    }
+
+    const testimonialObserver = new IntersectionObserver((entries) => {
+        entries[0].isIntersecting ? startAutoplay() : stopAutoplay();
+    }, { threshold: 0.1 });
+    testimonialObserver.observe(carousel);
+
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
 
     // Touch support
     let touchStartX = 0;
-    track.addEventListener("touchstart", e => { touchStartX = e.touches[0].clientX; });
+    track.addEventListener("touchstart", e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener("touchend", e => {
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) {
@@ -430,28 +476,6 @@ function initContactForm() {
 
         form.reset();
     });
-}
-
-// ===== Scroll Animations =====
-function initScrollAnimations() {
-    const elements = document.querySelectorAll("[data-animate]");
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add("animate-in");
-                    }, index * 100);
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 0.15 }
-    );
-
-    elements.forEach(el => observer.observe(el));
 }
 
 // ===== Accessibility Widget =====
