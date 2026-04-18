@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="Images/Shiraz Levi.webp" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Suez+One&family=Karantina:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=4.0">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-481XBY1KB2"></script>
     <script>
@@ -64,6 +64,7 @@
         <div class="hero-decoration hero-decoration--bottom-right"></div>
         <div class="container">
             <div class="hero-compact">
+                <span class="hero-eyebrow">Shiraz Levi · Skin Therapy</span>
                 <div class="hero-portrait">
                     <div class="hero-portrait-flip">
                         <div class="hero-portrait-front">
@@ -90,42 +91,44 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-eyebrow"><span class="section-numeral">I</span> · Services</span>
                 <h2 class="section-title-script">תחומי ההתמחות שלי</h2>
+                <p>טיפולים מותאמים אישית לכל סוג עור, בשיטות מתקדמות ובליווי מקצועי לאורך כל הדרך</p>
             </div>
             <div class="services-slider">
                 <div class="services-track" id="servicesTrack">
-                    <div class="service-card">
+                    <div class="service-card" data-num="01">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div>
                         <h3>הסרת שיער בלייזר</h3>
                         <p>טיפול מתקדם ויעיל להסרת שיער לצמיתות, בטכנולוגיות מתקדמות ובטוחות, המותאמות אישית לכל סוג עור ושיער.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-num="02">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/><circle cx="12" cy="8" r="2"/><path d="M12 10v12"/><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/></svg></div>
                         <h3>טיפולי פנים</h3>
                         <p>מגוון טיפולים מותאמים אישית לניקוי עמוק, הזנה ושיקום עור הפנים, בחומרים איכותיים וטכניקות מתקדמות.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-num="03">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
                         <h3>טיפול באקנה</h3>
                         <p>פתרונות מקצועיים לטיפול בעור בעייתי ואקנה, בהתאמה אישית למצב העור לשיפור משמעותי במראה.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-num="04">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></div>
                         <h3>טיפול בפיגמנטציה</h3>
                         <p>טיפולים להבהרת כתמים ואחידות גוון העור, בשיטות מתקדמות לשיפור מראה עור זוהר ובריא.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-num="05">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></div>
                         <h3>אנטי אייג'ינג</h3>
                         <p>טיפולים חדשניים להאטת הזדקנות העור, שיפור גמישות, מיצוק והענקת מראה צעיר ורענן.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-num="06">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg></div>
                         <h3>הסרת נגעים</h3>
                         <p>הסרה מקצועית ובטוחה של נגעי עור שפירים, באמצעות טכנולוגיות מתקדמות ובהתאמה אישית לכל סוג נגע ועור.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-num="07">
                         <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6"/><path d="m6 8 6 2 6-2"/><path d="M12 10v4"/></svg></div>
                         <h3>טיפולי גוף</h3>
                         <p>טיפולים מתקדמים למיצוק והצערת עור הגוף, שיפור מרקם העור והענקת מראה חלק, מוצק וצעיר.</p>
@@ -144,9 +147,10 @@
     <!-- Brands Section -->
     <section class="brands" id="brands">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-eyebrow"><span class="section-numeral">II</span> · Atelier</span>
                 <h2 class="section-title-script">עובדת עם המותגים המובילים</h2>
-                <p>תכשירים מקצועיים של חברות מובילות בעולם הטיפוח - זמינים לרכישה בקליניקה</p>
+                <p>תכשירים מקצועיים של חברות מובילות בעולם הטיפוח — זמינים לרכישה בקליניקה</p>
             </div>
             <div class="brands-grid">
                 <div class="brand-card">
@@ -169,7 +173,8 @@
     <!-- Gallery Section -->
     <section class="gallery" id="gallery" aria-label="גלריית תמונות">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-eyebrow"><span class="section-numeral">III</span> · Portfolio</span>
                 <h2 class="section-title-script">הגלריה שלנו</h2>
                 <p>הצצה לעולם הטיפוח והיופי בקליניקה</p>
             </div>
@@ -206,7 +211,8 @@
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-eyebrow"><span class="section-numeral">IV</span> · Words</span>
                 <h2 class="section-title-script">מה הלקוחות שלנו אומרות</h2>
                 <p>המלצות אמיתיות מלקוחות מרוצות שכבר חוו את הטיפולים שלנו</p>
             </div>
@@ -230,7 +236,8 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-eyebrow"><span class="section-numeral">V</span> · Contact</span>
                 <h2 class="section-title-script">צרי קשר</h2>
                 <p>מוזמנת ליצור קשר לקבלת ייעוץ, מידע נוסף או קביעת תור</p>
             </div>
@@ -239,6 +246,7 @@
                 <div class="contact-info">
                     <div class="contact-card">
                         <h3>פרטי התקשרות</h3>
+                        <p class="contact-card-subtitle">Get in touch</p>
                         <div class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <div>
@@ -379,6 +387,6 @@
     </div>
 
     <!-- Scripts -->
-    <script defer src="script.js?v=3.0"></script>
+    <script defer src="script.js?v=4.0"></script>
 </body>
 </html>

@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
     initStickyHeader();
     initServicesSlider();
+    initScrollReveal();
 
     // Each deferred task gets its own idle slot — no single long task
     scheduleIdle(() => initGallery(),              1000);
@@ -113,6 +114,28 @@ document.addEventListener("DOMContentLoaded", () => {
     scheduleIdle(() => initContactForm(),          2000);
     scheduleIdle(() => initAccessibilityWidget(),  2500);
 });
+
+// ===== Scroll Reveal =====
+function initScrollReveal() {
+    const targets = document.querySelectorAll(".reveal");
+    if (!targets.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+        targets.forEach(el => el.classList.add("in-view"));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+
+    targets.forEach(el => observer.observe(el));
+}
 
 // ===== Mobile Menu =====
 function initMobileMenu() {
